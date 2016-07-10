@@ -1,6 +1,7 @@
 define(['gameCanvas', 'map'], function(gameCanvas, map){
 
 	function Renderer(canvas, map) {
+
 		canvas.setup();
 		this.ctx = canvas.ctx;
 		this.dt;

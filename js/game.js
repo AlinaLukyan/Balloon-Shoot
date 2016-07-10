@@ -1,12 +1,13 @@
-define(['renderer'], function(renderer){
-
+define(['renderer', 'gameEngine'], function(renderer, gameEngine) {
 	function Game(renderer) {
 		this.renderer = renderer;
 	};
 
 	Game.prototype.start = function() {
+
 		function main() {
-			renderer.main()
+			renderer.main();
+			gameEngine.update();
 			this.reqID = requestAnimationFrame(main);
 		}
 		main();
