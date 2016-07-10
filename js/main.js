@@ -11,9 +11,8 @@ requirejs.config({
         lib: '../lib'
     }
 });
-console.log('Require done');
-requirejs(['gameCanvas'],
-function (gameCanvas) {
-    gameCanvas = gameCanvas.gameCanvas;
-    gameCanvas.setup();
+
+requirejs(['game'],
+function (game) {
+    game.start();
 });

@@ -9,13 +9,10 @@ define(function(){
     };
 
     GameCanvas.prototype.setup = function() {
-        console.log(this)
         document.body.appendChild(this.canvas);
     };
 
     var gameCanvas = new GameCanvas();
 
-    return {
-        gameCanvas: gameCanvas
-    }
+    return gameCanvas;
 });
