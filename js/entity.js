@@ -7,8 +7,7 @@ define(function() {
 	*		y: y,
 	*		width: width,
 	*		height: height,
-	*		zIndex: zIndex,
-	*		sprite: sprite
+	*		zIndex: zIndex
 	*	};
 	*	
 	******************************/
@@ -19,11 +18,10 @@ define(function() {
 		this.width = obj.width;
 		this.height = obj.height;
 		this.zIndex = obj.zIndex;
-		this.sprite = obj.sprite
 	};
 
 	Entity.prototype.update = function () {
-		
+ 		
 	};
-
+	return Entity;
 });

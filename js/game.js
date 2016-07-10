@@ -1,4 +1,4 @@
-define(['renderer', 'gameEngine'], function(renderer, gameEngine) {
+define(['renderer', 'gameEngine', 'loader'], function(renderer, gameEngine, loader) {
 	function Game(renderer) {
 		this.renderer = renderer;
 	};
@@ -8,9 +8,13 @@ define(['renderer', 'gameEngine'], function(renderer, gameEngine) {
 		function main() {
 			renderer.main();
 			gameEngine.update();
+			gameEngine.render();
 			this.reqID = requestAnimationFrame(main);
 		}
-		main();
+		loader.load([
+	        './img/cloud.png'
+	    ]);
+	    loader.onReady(main);
 	};
 
 	Game.prototype.end = function() {
