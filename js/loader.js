@@ -1,8 +1,12 @@
-define(function() {
+define(['gameCanvas'], function(gameCanvas) {
     function Loader() {
         this.resourceCache = {};
         this.loading = [];
-        this.readyCallbacks = [];    
+        this.readyCallbacks = [];
+        this.tempCanvas = document.createElement('canvas');
+        this.tempCanvas.height = window.innerHeight;
+        this.tempCanvas.width = window.innerWidth;
+        this.ctx = this.tempCanvas.getContext('2d');  
     };
 
     Loader.prototype._load = function (url) {
@@ -13,6 +17,7 @@ define(function() {
             var self = this;
             img.onload = function() {
                 self.resourceCache[url] = img;
+                self.ctx.drawImage(img, 0, 0, img.width, img.height);
                 if(self.isReady()) {
                     self.readyCallbacks.forEach(function(func) { func(); });
                 }

@@ -9,7 +9,7 @@ define(function(){
     };
 
     GameCanvas.prototype.setup = function() {
-        document.body.appendChild(this.canvas);
+        document.querySelector('#canvas-wrapper').appendChild(this.canvas);
     };
 
     var gameCanvas = new GameCanvas();

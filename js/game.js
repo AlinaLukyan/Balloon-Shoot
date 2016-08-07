@@ -1,20 +1,32 @@
-define(['renderer', 'gameEngine', 'loader'], function(renderer, gameEngine, loader) {
+define(['renderer', 'gameEngine', 'loader', 'sprites', 'scenario'], function(renderer, gameEngine, loader, sprites, scenario) {
 	function Game(renderer) {
 		this.renderer = renderer;
+		this.lastTime = Date.now();
+		this.now;
+		this.dt;
 	};
 
 	Game.prototype.start = function() {
-
+		var self = this;
 		function main() {
+			self.now = Date.now();
+			self.dt = (self.now - self.lastTime) / 1000.0;
 			renderer.main();
-			gameEngine.update();
+			gameEngine.update(self.dt);
 			gameEngine.render();
+			self.lastTime = self.now;
 			this.reqID = requestAnimationFrame(main);
 		}
 		loader.load([
-	        './img/cloud.png'
+	        './img/cloud.png',
+	        './img/balloons.png',
+	        './img/balloons2.png',
+	        './img/explosion.png'
 	    ]);
-	    loader.onReady(main);
+	    loader.onReady(function(){
+	    	main();
+	    	scenario.run();
+	    });
 	};
 
 	Game.prototype.end = function() {

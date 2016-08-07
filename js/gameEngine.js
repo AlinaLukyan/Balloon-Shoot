@@ -1,9 +1,10 @@
-define(['gameCanvas','cloud'] , function(gameCanvas, Cloud) {
+define(['gameCanvas', 'player','cloud', 'blueBalloon', 'orangeBalloon'] , function(gameCanvas, player, Cloud, BlueBalloon, OrangeBalloon) {
 
 	function GameEngine() {
 		this.entities = {};
 		this.factory = {};
 		this.layers = {};
+		this.balloons = {};
 		this.last;
 	};
 
@@ -11,31 +12,51 @@ define(['gameCanvas','cloud'] , function(gameCanvas, Cloud) {
 		this.factory[name] = creator;
 	};
 
+	GameEngine.prototype.enableShooting = function() {
+		var balloons = this.balloons;
+		gameCanvas.canvas.addEventListener("click", function(event){
+		    player.eventListnerGame(event, balloons);
+		}, false);
+	}
+
 	GameEngine.prototype.spawnEntity = function(name, obj, velocity) {
 		var entityID = GameEngine.guid();
 		this.entities[entityID] = new this.factory[name](obj, velocity);
 		this.entities[entityID].ID = entityID;
 		this.addToLayer(this.entities[entityID]);
-		this.last = this.entities[entityID];
+		if(this.entities[entityID].type === 'Balloon') {
+			this.balloons[entityID] = this.entities[entityID];
+			this.last = this.entities[entityID];
+		}
 	};
 
 	GameEngine.prototype.initFactory = function(arr) {
-		for(var i = 1; i < arr.length; i++) {
+		for(var i = 2; i < arr.length; i++) {
 			var construct = arr[i];
 			this.factory[construct.name] = construct;
 		}
 	};
 
+	GameEngine.prototype.clearFactory = function() {
+		this.factory = {};
+	};
+
 	GameEngine.prototype.removeEntity = function(entity) {
 		this.removeFromLayer(entity);
+		if(this.balloons[entity.ID]) {
+			delete this.balloons[entity.ID];
+		}
 		delete this.entities[entity.ID];
 	};
 
-	GameEngine.prototype.update = function() {
+	GameEngine.prototype.update = function(dt) {
 		var keys = Object.keys(this.entities);
 		for(var i = 0; i < keys.length; i++) {
 			var key = keys[i];
-			this.entities[key].update();
+			this.entities[key].update(dt);
+			if(this.entities[key].isDead) {				
+				this.removeEntity(this.entities[key]);
+			}
 		}
 	};
 
@@ -75,29 +96,53 @@ define(['gameCanvas','cloud'] , function(gameCanvas, Cloud) {
 	var gameEngine = new GameEngine();
 
 	gameEngine.initFactory(arguments);
+	gameEngine.enableShooting();
 
-	gameEngine.spawnEntity("Cloud", {
+	/*gameEngine.spawnEntity("Cloud", {
 			y: 100,
 			width: 200,
 			height: 100,
-			zIndex: 1
-			}, -0.5);
+			zIndex: 1,
+			velocity: -20
+			});
+	gameEngine.spawnEntity("BlueBalloon", {
+				y: 600,
+				x: 600,
+				width: 75,
+				height: 100,
+				zIndex: 6,
+				velocity: -50
+			});
+	gameEngine.spawnEntity("OrangeBalloon", {
+				y: 600,
+				x: 800,
+				width: 75,
+				height: 100,
+				zIndex: 5,
+				velocity: -80
+			});
+	gameEngine.spawnEntity("OrangeBalloon", {
+				y: 600,
+				x: 850,
+				width: 75,
+				height: 100,
+				zIndex: 5,
+				velocity: -50
+			});
 	gameEngine.spawnEntity("Cloud", {
 			y: 150,
 			width: 150,
 			height: 75,
-			zIndex: -1
-			}, 0.5);
+			zIndex: -1,
+			velocity: 30
+			});
 	gameEngine.spawnEntity("Cloud", {
 			y: 200,
 			width: 200,
 			height: 100,
-			zIndex: 2
-			}, 0.5);
-	
-	setTimeout(function(){
-		gameEngine.removeEntity(gameEngine.last);
-	}, 2000);
+			zIndex: 2,
+			velocity: 20
+			});*/
 
 	return gameEngine;
 });

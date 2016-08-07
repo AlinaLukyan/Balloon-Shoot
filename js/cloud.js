@@ -7,17 +7,16 @@ define(['entity', 'loader'], function(Entity, loader) {
 	*		y: y,
 	*		width: width,
 	*		height: height,
-	*		zIndex: zIndex
+	*		zIndex: zIndex,
+	*		velocity: velocity
 	*	},
-	*	speed = 5,
-	*	direction = 'right'
 	*	
 	******************************/
 
-	function Cloud(obj, velocity) {
+	function Cloud(obj) {
 		Entity.call(this, obj);
 		this.name = 'Cloud';
-		this.velocity = velocity;
+		this.velocity = obj.velocity;
 		if(this.velocity < 0) {
 			this.x = 1280;
 		} else {
@@ -31,8 +30,8 @@ define(['entity', 'loader'], function(Entity, loader) {
 	Cloud.prototype = Object.create(Entity.prototype);
 	Cloud.prototype.constructor = Cloud;
 
-	Cloud.prototype.update = function () {
-		this.x += this.velocity;
+	Cloud.prototype.update = function (dt) {
+		this.x += this.velocity * dt;
 
 		if(this.x > 1280 || this.x < 0 - this.width) {
 			this.x = this.initialX;
