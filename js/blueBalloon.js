@@ -30,7 +30,7 @@ define(['balloon','sprites'], function(Balloon, sprites) {
 		this.y += this.velocity * dt;
 
 		if(this.y + this.height < 0) {
-			this.y = this.initialY;
+			this.isDead = true;
 		}
 		this.updatePolygon();
 		this.cx = this.x - (this.width/2);
