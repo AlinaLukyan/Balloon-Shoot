@@ -15,7 +15,13 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 		var lvlTime = lvl1.time;
 		var total = lvl1.sum;
 		var self = this;
-		console.log((lvlTime * 60 * 1000) / lvlEntities.length)
+
+		gameEngine.spawnEntity('TopBoard', {
+			timer: lvlTime,
+			bullets: 8,
+			score: 0
+		});
+		
 		this.sInterval = setInterval(function() {
 			var randomIndex = Math.floor(Math.random() * (lvlEntities.length - 0)) + 0;
 			var randomPoint = Math.floor(Math.random() * (self.botSpawnMap.length - 0)) + 0;
