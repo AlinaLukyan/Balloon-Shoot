@@ -3,8 +3,8 @@ define(function(){
     function GameCanvas() {
         this.canvas = document.createElement('canvas'),
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = 1280;
-        this.canvas.height = 576;
+        this.canvas.width = 1638;
+        this.canvas.height = 768;
         this.canvas.id = 'my_canvas';
     };
 
