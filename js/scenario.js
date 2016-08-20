@@ -24,6 +24,7 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 				y: self.botSpawnMap[randomPoint].y,
 				x: self.botSpawnMap[randomPoint].x,
 				scale: lvlEntities[randomIndex].scale,
+				theta: lvlEntities[randomIndex].theta,
 				zIndex: lvlEntities[randomIndex].zIndex,
 				velocity: lvlEntities[randomIndex].velocity
 			});

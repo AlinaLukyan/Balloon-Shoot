@@ -1,4 +1,4 @@
-define(['gameCanvas', 'player','cloud', 'blueBalloon', 'orangeBalloon', 'greenBalloon'] , function(gameCanvas, player, Cloud, BlueBalloon, OrangeBalloon, GreenBalloon) {
+define(['gameCanvas', 'player','cloud', 'blueBalloon', 'orangeBalloon', 'greenBalloon', 'redBalloon'] , function(gameCanvas, player, Cloud, BlueBalloon, OrangeBalloon, GreenBalloon, RedBalloon) {
 
 	function GameEngine() {
 		this.entities = {};

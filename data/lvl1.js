@@ -16,7 +16,10 @@ define(function() {
 			{name: 'BlueBalloon', velocity: -150, scale: 1.1, zIndex: 5},
 			{name: 'GreenBalloon', velocity: -100, scale: 0.8, zIndex: 3},
 			{name: 'BlueBalloon', velocity: -135, scale: 1.1, zIndex: 5},
-			{name: 'OrangeBalloon', velocity: -145, scale: 0.9, zIndex: 4}
+			{name: 'OrangeBalloon', velocity: -145, scale: 0.9, zIndex: 4},
+			{name: 'RedBalloon', theta: 75, scale: 0.9, zIndex: 5},
+			{name: 'RedBalloon', theta: 85, scale: 1.3, zIndex: 3},
+			{name: 'RedBalloon', theta: 70, scale: 1.0, zIndex: 4}
 		]
 	}
 	return lvlOne;
