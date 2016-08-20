@@ -25,6 +25,7 @@ define(['entity', 'loader'], function(Entity, loader) {
 		this._defferedDeath = false;
 		this.isDead = false;
 		this._animationCount = 1;
+		this.scale = obj.scale;
 		if (!this.width || !this.height) {
 			this.width = 75 * obj.scale;
 			this.height = 100 * obj.scale;
@@ -32,6 +33,8 @@ define(['entity', 'loader'], function(Entity, loader) {
 		this.y = this.y + this.height;
 		this.cx;
 		this.cy;
+		this.cost = Math.floor(200 - 100 * obj.scale);
+		this.point = false;
 	};
 
 	Balloon.prototype = Object.create(Entity.prototype);
@@ -72,6 +75,7 @@ define(['entity', 'loader'], function(Entity, loader) {
 	        && (c = !c);
 	    if(c) {    	
 	    	this.playAnimation(55, 48);
+	    	console.log(this.cost);
 	    }
 	    return c;
 	};

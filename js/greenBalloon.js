@@ -22,7 +22,8 @@ define(['balloon','sprites'], function(Balloon, sprites) {
 		this.velocity = obj.velocity;
 		this.initialY = this.y;
 		this.offset = 3;
-		this.theta = 0.00;	
+		this.theta = 0.00;
+		this.cost = Math.floor(this.cost * 1.3);	
 	};
 	GreenBalloon.prototype = Object.create(Balloon.prototype);
 	GreenBalloon.prototype.constructor = GreenBalloon;

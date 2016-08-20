@@ -1,4 +1,4 @@
-define(['gameCanvas', 'player','cloud', 'blueBalloon', 'orangeBalloon', 'greenBalloon', 'redBalloon'] , function(gameCanvas, player, Cloud, BlueBalloon, OrangeBalloon, GreenBalloon, RedBalloon) {
+define(['gameCanvas', 'player','cloud', 'point', 'blueBalloon', 'orangeBalloon', 'greenBalloon', 'redBalloon'] , function(gameCanvas, player, Cloud, Point, BlueBalloon, OrangeBalloon, GreenBalloon, RedBalloon) {
 
 	function GameEngine() {
 		this.entities = {};
@@ -54,6 +54,15 @@ define(['gameCanvas', 'player','cloud', 'blueBalloon', 'orangeBalloon', 'greenBa
 		for(var i = 0; i < keys.length; i++) {
 			var key = keys[i];
 			this.entities[key].update(dt);
+			if(this.entities[key]._defferedDeath && !this.entities[key].point) {
+					this.entities[key].point = true;
+					this.spawnEntity('Point', {
+					y: this.entities[key].y - this.entities[key].height / 3,
+					x: this.entities[key].x + this.entities[key].width * 0.7,
+					cost: this.entities[key].cost,
+					scale: this.entities[key].scale,
+				});
+			}
 			if(this.entities[key].isDead) {				
 				this.removeEntity(this.entities[key]);
 			}

@@ -19,13 +19,12 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 		this.sInterval = setInterval(function() {
 			var randomIndex = Math.floor(Math.random() * (lvlEntities.length - 0)) + 0;
 			var randomPoint = Math.floor(Math.random() * (self.botSpawnMap.length - 0)) + 0;
-			console.log(lvlEntities[randomIndex].name, self.botSpawnMap[randomPoint].y, self.botSpawnMap[randomPoint].x)
 			gameEngine.spawnEntity(lvlEntities[randomIndex].name, {
 				y: self.botSpawnMap[randomPoint].y,
 				x: self.botSpawnMap[randomPoint].x,
 				scale: lvlEntities[randomIndex].scale,
 				theta: lvlEntities[randomIndex].theta,
-				zIndex: lvlEntities[randomIndex].zIndex,
+				zIndex: 10 * lvlEntities[randomIndex].scale,
 				velocity: lvlEntities[randomIndex].velocity
 			});
 		}, (lvlTime * 60 * 1000) / total);

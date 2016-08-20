@@ -23,6 +23,7 @@ define(['balloon','sprites'], function(Balloon, sprites) {
 		this.initialY = this.y;
 		this.initialTheta = obj.theta;
 		this.theta = obj.theta;
+		this.cost = Math.floor(this.cost * 1.1);
 	};
 	RedBalloon.prototype = Object.create(Balloon.prototype);
 	RedBalloon.prototype.constructor = RedBalloon;
@@ -44,11 +45,9 @@ define(['balloon','sprites'], function(Balloon, sprites) {
 		this.cy = this.y - (this.height/2);
 	};
 	RedBalloon.prototype._increment = function () {
-		console.log('+')
 		this.theta +=1.5;
 	};
 	RedBalloon.prototype._decrement = function () {
-		console.log('-')
 		this.theta -=1.5;
 	};
 	RedBalloon.prototype._move = RedBalloon.prototype._increment;

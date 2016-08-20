@@ -36,6 +36,8 @@ define(['gameCanvas'], function(gameCanvas) {
         } else {
             this._load(urlOrArr);
         }
+        self.ctx.font = "1px Baloo";
+        self.ctx.fillText('Load', 0, 0);
     };
 
 
