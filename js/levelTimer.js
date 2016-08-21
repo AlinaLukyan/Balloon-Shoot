@@ -33,9 +33,11 @@ define(function() {
 	};
 
 	LevelTimer.prototype.render = function(ctx) {
-		ctx.font = this.fontSize + "px Baloo";
-		ctx.fillStyle = "rgba(2, 151, 255, 1.0)";
-		ctx.fillText('Time: ' + this.timeLeft.minutes + ':' + this.timeLeft.seconds, this.x, this.y);		
+		ctx.font = this.fontSize + "px Baloo";	
+		ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
+		ctx.fillText('Time: ' + this.timeLeft.minutes + ':' + this.timeLeft.seconds, this.x, this.y);
+		ctx.strokeStyle = "rgba(2, 151, 255, 1.0)";
+		ctx.strokeText('Time: ' + this.timeLeft.minutes + ':' + this.timeLeft.seconds, this.x, this.y);	
 	};
 
 	return LevelTimer;

@@ -16,7 +16,7 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 		var total = lvl1.sum;
 		var self = this;
 
-		gameEngine.spawnEntity('TopBoard', {
+		gameEngine.spawnTopBoard({
 			timer: lvlTime,
 			bullets: 8,
 			score: 0

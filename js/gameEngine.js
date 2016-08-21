@@ -1,11 +1,12 @@
-define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'orangeBalloon', 'greenBalloon', 'redBalloon'] , function(gameCanvas, player, Cloud, Point, TopBoard, BlueBalloon, OrangeBalloon, GreenBalloon, RedBalloon) {
+define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'orangeBalloon', 'greenBalloon', 'redBalloon'], 
+	function(gameCanvas, player, Cloud, Point, TopBoard, BlueBalloon, OrangeBalloon, GreenBalloon, RedBalloon) {
 
 	function GameEngine() {
 		this.entities = {};
 		this.factory = {};
 		this.layers = {};
 		this.balloons = {};
-		this.last;
+		this.topBoard;
 	};
 
 	GameEngine.prototype.addToFactory = function(name, creator) {
@@ -26,8 +27,21 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 		this.addToLayer(this.entities[entityID]);
 		if(this.entities[entityID].type === 'Balloon') {
 			this.balloons[entityID] = this.entities[entityID];
-			this.last = this.entities[entityID];
 		}
+	};
+
+	GameEngine.prototype.spawnTopBoard = function(obj) {
+		var entityID = GameEngine.guid();
+		this.entities[entityID] = new this.factory["TopBoard"](obj);
+		this.entities[entityID].ID = entityID;
+		this.addToLayer(this.entities[entityID]);
+		this.topBoard = this.entities[entityID];
+	};
+
+	GameEngine.prototype.removeTopBoard = function() {
+		this.removeFromLayer(this.topBoard);
+		delete this.entities[this.topBoard.ID];
+		this.topBoard = undefined;
 	};
 
 	GameEngine.prototype.initFactory = function(arr) {
@@ -56,6 +70,7 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 			this.entities[key].update(dt);
 			if(this.entities[key]._defferedDeath && !this.entities[key].point) {
 					this.entities[key].point = true;
+					this.topBoard.score.addToScore(this.entities[key].cost);
 					this.spawnEntity('Point', {
 					y: this.entities[key].y - this.entities[key].height / 3,
 					x: this.entities[key].x + this.entities[key].width * 0.7,
