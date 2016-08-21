@@ -4,7 +4,7 @@ define(function() {
 		this.value = value;
 		this.fontSize = fontSize;
 		this.x = x;
-		this.y = 40;
+		this.y = 55;
 		this.zIndex = 100;
 	};
 	Score.prototype.addToScore = function (num) {

@@ -15,8 +15,17 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 
 	GameEngine.prototype.enableShooting = function() {
 		var balloons = this.balloons;
+		var self = this;
 		gameCanvas.canvas.addEventListener("click", function(event){
-		    player.eventListnerGame(event, balloons);
+			if (self.topBoard.bullets.value && !self.topBoard.bullets.pending) {
+				self.topBoard.bullets.reduce();
+		    	player.eventListnerGame(event, balloons);
+		    }
+		}, false);
+		gameCanvas.canvas.addEventListener('contextmenu', function(event){
+			event.preventDefault();		    	
+	    	self.topBoard.bullets.reload();
+	    	return false;
 		}, false);
 	}
 

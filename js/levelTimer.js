@@ -6,7 +6,7 @@ define(function() {
 		this.timeLeft = {};
 		this.fontSize = fontSize;
 		this.x = x;
-		this.y = 40;
+		this.y = 55;
 		this.zIndex = 100;
 	};
 	LevelTimer.prototype.getTimeRemaining = function () {
