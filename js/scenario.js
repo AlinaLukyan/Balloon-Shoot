@@ -6,6 +6,7 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 		this.topSpawnMap = [];
 		this.sInterval;
 		this.sTimeout;
+		this.tempBotSpawnMap = [];
 	};
 
 	Scenario.prototype.run = function (lvl) {
@@ -24,15 +25,20 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 		
 		this.sInterval = setInterval(function() {
 			var randomIndex = Math.floor(Math.random() * (lvlEntities.length - 0)) + 0;
-			var randomPoint = Math.floor(Math.random() * (self.botSpawnMap.length - 0)) + 0;
+			var randomPoint = Math.floor(Math.random() * (self.tempBotSpawnMap.length - 0)) + 0;
+			
 			gameEngine.spawnEntity(lvlEntities[randomIndex].name, {
-				y: self.botSpawnMap[randomPoint].y,
-				x: self.botSpawnMap[randomPoint].x,
+				y: self.tempBotSpawnMap[randomPoint].y,
+				x: self.tempBotSpawnMap[randomPoint].x,
 				scale: lvlEntities[randomIndex].scale,
 				theta: lvlEntities[randomIndex].theta,
 				zIndex: 10 * lvlEntities[randomIndex].scale,
 				velocity: lvlEntities[randomIndex].velocity
 			});
+			self.tempBotSpawnMap.splice(randomPoint, 1);
+			if (self.tempBotSpawnMap.length ===0) {
+				self.tempBotSpawnMap = self.tempBotSpawnMap.concat(self.botSpawnMap);
+			}
 		}, (lvlTime * 60 * 1000) / total);
 		this.sTimeout = setTimeout(function() {
 			clearInterval(self.sInterval);
@@ -55,6 +61,7 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 			this.leftSpawnMap.push({x: 0, y: heightInteral * i - outsetHeight});
 			this.rightSpawnMap.push({x: gameCanvas.canvas.width, y: heightInteral * i - outsetHeight});
 		}
+		this.tempBotSpawnMap = this.tempBotSpawnMap.concat(this.botSpawnMap);
 	};
 	var scenario = new Scenario();
 	return scenario;

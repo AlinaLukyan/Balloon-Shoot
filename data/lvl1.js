@@ -1,7 +1,7 @@
 define(function() {
 	var lvlOne = {
 		time: 2,
-		sum: 160,
+		sum: 100,
 		entities: [
 			{name: 'GreenBalloon', velocity: -150, scale: 1},
 			{name: 'OrangeBalloon', velocity: -80, scale: 1.2},
