@@ -1,5 +1,7 @@
-define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'orangeBalloon', 'greenBalloon', 'redBalloon'], 
-	function(gameCanvas, player, Cloud, Point, TopBoard, BlueBalloon, OrangeBalloon, GreenBalloon, RedBalloon) {
+define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'orangeBalloon', 
+	'greenBalloon', 'redBalloon', 'purpleBalloon', 'pinkBalloon_splited', 'pinkBalloon', 'whiteBalloon'], 
+	function(gameCanvas, player, Cloud, Point, TopBoard, BlueBalloon, OrangeBalloon, GreenBalloon,
+	 RedBalloon, PurpleBalloon, PinkBalloon_splited, PinkBalloon, WhiteBalloon) {
 
 	function GameEngine() {
 		this.entities = {};
@@ -53,6 +55,22 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 		this.topBoard = undefined;
 	};
 
+	GameEngine.prototype.entityDecay = function(ent) {
+		var decay = ent.decay;
+		for (var i = 0; i < decay.length; i++) {
+			this.spawnEntity(decay[i].name, {
+				y: decay[i].y,
+				x: decay[i].x,
+				scale: decay[i].scale,
+				zIndex: decay[i].zIndex,
+				velocity: decay[i].velocity,
+				direction: decay[i].direction
+			});
+		};
+		ent.decay = false;
+		ent.isDead = true;	
+	};
+
 	GameEngine.prototype.initFactory = function(arr) {
 		for(var i = 2; i < arr.length; i++) {
 			var construct = arr[i];
@@ -86,6 +104,9 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 					cost: this.entities[key].cost,
 					scale: this.entities[key].scale,
 				});
+			}
+			if(this.entities[key].decay) {
+				this.entityDecay(this.entities[key]);
 			}
 			if(this.entities[key].isDead) {				
 				this.removeEntity(this.entities[key]);
@@ -162,13 +183,7 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 				zIndex: 5,
 				velocity: -50
 			});
-	gameEngine.spawnEntity("Cloud", {
-			y: 150,
-			width: 150,
-			height: 75,
-			zIndex: -1,
-			velocity: 30
-			});
+	
 	gameEngine.spawnEntity("Cloud", {
 			y: 200,
 			width: 200,

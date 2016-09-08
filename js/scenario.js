@@ -13,6 +13,7 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 		this.getSpawnPoints();
 		
 		var lvlEntities = lvl1.entities;
+		var lvlEnv = lvl1.environment;
 		var lvlTime = lvl1.time;
 		var total = lvl1.sum;
 		var self = this;
@@ -22,17 +23,28 @@ define(['gameEngine', 'gameCanvas', 'data/lvl1'], function(gameEngine, gameCanva
 			bullets: 8,
 			score: 0
 		});
+
+		for(var i = 0; i < lvlEnv.length; i++) {
+			gameEngine.spawnEntity(lvlEnv[i].name, {
+			y: this.leftSpawnMap[lvlEnv[i].position].y,
+			x: this.leftSpawnMap[lvlEnv[i].position].x,
+			type: lvlEnv[i].type,
+			scale: lvlEnv[i].scale,
+			zIndex: 1,
+			velocity: lvlEnv[i].velocity
+			});
+		}
 		
 		this.sInterval = setInterval(function() {
 			var randomIndex = Math.floor(Math.random() * (lvlEntities.length - 0)) + 0;
 			var randomPoint = Math.floor(Math.random() * (self.tempBotSpawnMap.length - 0)) + 0;
-			
+			console.log(lvlEntities[randomIndex].name)
 			gameEngine.spawnEntity(lvlEntities[randomIndex].name, {
 				y: self.tempBotSpawnMap[randomPoint].y,
 				x: self.tempBotSpawnMap[randomPoint].x,
 				scale: lvlEntities[randomIndex].scale,
 				theta: lvlEntities[randomIndex].theta,
-				zIndex: 10 * lvlEntities[randomIndex].scale,
+				zIndex: Math.floor(10 * lvlEntities[randomIndex].scale),
 				velocity: lvlEntities[randomIndex].velocity
 			});
 			self.tempBotSpawnMap.splice(randomPoint, 1);

@@ -59,13 +59,13 @@ define(['entity', 'loader'], function(Entity, loader) {
 	    if (this.currentSheet) {
 	    	ctx.drawImage(loader.get(this.currentSheet), spt.x, spt.y, spt.w, spt.h, this.cx, this.cy, this.width, this.height);
 	    }
-	    /*if(this.polygon.length) {
-	    	var i;
-	    	var l = this.polygon.length;
-	    	for(i = 0; i < l; i++) {
-	    		ctx.fillRect(this.polygon[i].x, this.polygon[i].y,3,3);
-	    	}	    	
-	    }*/
+	    // if(this.polygon.length) {
+	    // 	var i;
+	    // 	var l = this.polygon.length;
+	    // 	for(i = 0; i < l; i++) {
+	    // 		ctx.fillRect(this.polygon[i].x, this.polygon[i].y,3,3);
+	    // 	}	    	
+	    // }
 	};
 
 	Balloon.prototype.detectCollision = function (pt) {
@@ -75,7 +75,6 @@ define(['entity', 'loader'], function(Entity, loader) {
 	        && (c = !c);
 	    if(c) {    	
 	    	this.playAnimation(55, 48);
-	    	console.log(this.cost);
 	    }
 	    return c;
 	};

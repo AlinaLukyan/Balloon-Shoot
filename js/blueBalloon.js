@@ -21,6 +21,10 @@ define(['balloon','sprites'], function(Balloon, sprites) {
 		this.currentSprite = this.sprites[0];
 		this.velocity = obj.velocity;
 		this.initialY = this.y;
+		this.initalWidth = this.width;
+		this.initialHeight = this.height;
+		this.updateScale = 1.0;
+		this.increment = 0.01;
 	};
 	BlueBalloon.prototype = Object.create(Balloon.prototype);
 	BlueBalloon.prototype.constructor = BlueBalloon;
@@ -28,6 +32,12 @@ define(['balloon','sprites'], function(Balloon, sprites) {
 	BlueBalloon.prototype.update = function (dt) {
 
 		this.y += this.velocity * dt;
+		this.updateScale += this.increment;
+		if (this.updateScale > 1.2) this.increment = -(this.increment);
+		if (this.updateScale < 0.3) this.increment = -(this.increment);
+
+		this.width = this.initalWidth * this.updateScale;
+		this.height = this.initialHeight * this.updateScale;
 
 		if(this.y + this.height < 0) {
 			this.isDead = true;

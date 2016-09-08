@@ -19,7 +19,24 @@ define(function() {
 			{name: 'OrangeBalloon', velocity: -145, scale: 0.9},
 			{name: 'RedBalloon', theta: 75, scale: 0.9},
 			{name: 'RedBalloon', theta: 85, scale: 1.3},
-			{name: 'RedBalloon', theta: 70, scale: 1.0}
+			{name: 'RedBalloon', theta: 70, scale: 1.0},
+			{name: 'PurpleBalloon', velocity: -145, scale: 0.9},
+			{name: 'PurpleBalloon', velocity: -125, scale: 1.1},
+			{name: 'PurpleBalloon', velocity: -75, scale: 0.8},
+			{name: 'PinkBalloon', velocity: -145, scale: 0.9},
+			{name: 'PinkBalloon', velocity: -125, scale: 1.1},
+			{name: 'PinkBalloon', velocity: -75, scale: 0.8},
+			{name: 'PinkBalloon', velocity: -125, scale: 1.1},
+			{name: 'PinkBalloon', velocity: -75, scale: 0.8},
+			{name: 'WhiteBalloon', velocity: -145, scale: 0.9},
+			{name: 'WhiteBalloon', velocity: -125, scale: 1.1},
+			{name: 'WhiteBalloon', velocity: -75, scale: 0.8},
+			{name: 'WhiteBalloon', velocity: -125, scale: 1.1},
+			{name: 'WhiteBalloon', velocity: -75, scale: 0.8},
+		],
+		environment: [
+			{name: "Cloud", type: 1, velocity: 50, scale: 1.5, position: 5},
+			{name: "Cloud", type: 2, velocity: -65, scale: 1, position: 2}
 		]
 	}
 	return lvlOne;
