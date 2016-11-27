@@ -1,7 +1,8 @@
 define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'orangeBalloon', 
-	'greenBalloon', 'redBalloon', 'purpleBalloon', 'pinkBalloon_splited', 'pinkBalloon', 'whiteBalloon'], 
+	'greenBalloon', 'redBalloon', 'purpleBalloon', 'pinkBalloon_splited', 'pinkBalloon', 'whiteBalloon',
+	'plane'], 
 	function(gameCanvas, player, Cloud, Point, TopBoard, BlueBalloon, OrangeBalloon, GreenBalloon,
-	 RedBalloon, PurpleBalloon, PinkBalloon_splited, PinkBalloon, WhiteBalloon) {
+	 RedBalloon, PurpleBalloon, PinkBalloon_splited, PinkBalloon, WhiteBalloon, Plane) {
 
 	function GameEngine() {
 		this.entities = {};
@@ -36,7 +37,7 @@ define(['gameCanvas', 'player','cloud', 'point', 'topBoard', 'blueBalloon', 'ora
 		this.entities[entityID] = new this.factory[name](obj, velocity);
 		this.entities[entityID].ID = entityID;
 		this.addToLayer(this.entities[entityID]);
-		if(this.entities[entityID].type === 'Balloon') {
+		if(this.entities[entityID].type === 'Balloon' || this.entities[entityID].type === 'Special') {
 			this.balloons[entityID] = this.entities[entityID];
 		}
 	};

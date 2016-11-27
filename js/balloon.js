@@ -96,8 +96,13 @@ define(['entity', 'loader'], function(Entity, loader) {
 			return this._animationCount++;
 		};
 
+	Balloon.prototype.dying = function() {
+			this._defferedDeath = true;
+		};
+
+
 	Balloon.prototype.playAnimation = function (speed, numOfFrames) {
-		this._defferedDeath = true;
+		this.dying();
 		var self = this;
 		var interval = setInterval(function() { self.setAnimationSprite.call(self, numOfFrames) } , 1000 / speed)
 		setTimeout(function(){ 

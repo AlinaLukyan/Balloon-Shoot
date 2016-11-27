@@ -22,7 +22,8 @@ define(['renderer', 'gameEngine', 'loader', 'sprites', 'scenario'], function(ren
 	        './img/balloons.png',
 	        './img/balloons2.png',
 	        './img/inv.png',
-	        './img/explosion.png'
+	        './img/explosion.png',
+	        './img/flyer.png'
 	    ]);
 	    loader.onReady(function(){
 	    	main();

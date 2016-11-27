@@ -1,4 +1,4 @@
-define(['data/balloonsAtlas', 'data/balloons2', 'data/explosion', 'data/inv'], function(balloonsAtlas) {
+define(['data/balloonsAtlas', 'data/balloons2', 'data/explosion', 'data/inv', 'data/flyer'], function(balloonsAtlas) {
 	function Sprites(arr) {
 		this.sprites = {};
 		this.atlases = arr;

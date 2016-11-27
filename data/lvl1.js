@@ -1,7 +1,7 @@
 define(function() {
 	var lvlOne = {
 		time: 2,
-		sum: 100,
+		sum: 75,
 		entities: [
 			{name: 'GreenBalloon', velocity: -150, scale: 1},
 			{name: 'OrangeBalloon', velocity: -80, scale: 1.2},
@@ -33,6 +33,9 @@ define(function() {
 			{name: 'WhiteBalloon', velocity: -75, scale: 0.8},
 			{name: 'WhiteBalloon', velocity: -125, scale: 1.1},
 			{name: 'WhiteBalloon', velocity: -75, scale: 0.8},
+		],
+		specials: [
+			{name: 'Plane', velocity: 500, scale: 0.8},
 		],
 		environment: [
 			{name: "Cloud", type: 1, velocity: 50, scale: 1.5, position: 5},
